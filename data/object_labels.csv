@@ -1,0 +1,584 @@
+label,entity
+96,traffic sign
+211,flag
+99,poster
+46,headphones
+183,stop sign
+409,wheel
+334,plant
+404,vehicle
+176,goggles
+552,tire
+414,auto part
+277,fashion accessory
+281,table
+567,glasses
+391,tree
+584,binoculars
+83,vehicle registration plate
+292,human head
+253,human hair
+136,box
+502,human face
+103,land vehicle
+40,bicycle
+456,flower
+433,clothing
+87,billboard
+69,person
+440,rocket
+408,weapon
+298,mammal
+571,car
+15,human eye
+447,book
+353,skateboard
+160,door
+485,window
+348,digital clock
+53,bicycle wheel
+586,ipod
+11,toy
+308,man
+228,woman
+434,footwear
+397,trousers
+106,watercraft
+43,boat
+333,girl
+503,human arm
+379,skyscraper
+381,television
+466,furniture
+177,human body
+462,building
+514,jeans
+97,chair
+221,human leg
+366,picture frame
+121,desk
+58,dress
+54,barge
+398,bowling equipment
+135,computer monitor
+184,office supplies
+67,tower
+468,airplane
+98,shirt
+498,lamp
+84,lantern
+138,christmas tree
+557,umbrella
+145,drink
+219,guitar
+461,maple
+262,drinking straw
+450,candle
+301,musical instrument
+19,beer
+538,light bulb
+340,pumpkin
+337,sports equipment
+8,toothbrush
+572,aircraft
+233,houseplant
+35,sunglasses
+286,bottle
+365,sword
+407,wine
+20,chopsticks
+530,candy
+441,wine glass
+80,balloon
+359,sculpture
+114,medical equipment
+111,snack
+124,juice
+494,seat belt
+93,stairs
+257,curtain
+322,musical keyboard
+38,ball
+332,piano
+241,house
+82,tent
+51,boy
+561,animal
+601,helmet
+540,sports uniform
+319,lifejacket
+250,bicycle helmet
+140,hiking equipment
+573,human hand
+399,football helmet
+214,human foot
+193,food
+515,flowerpot
+293,bowl
+22,bird
+282,tableware
+520,cake
+426,duck
+143,dessert
+258,bed
+131,fountain
+77,popcorn
+314,baked goods
+101,sock
+491,swan
+315,mushroom
+149,dairy
+445,swimming pool
+259,kettle
+415,jug
+317,pitcher
+68,teapot
+171,mug
+186,vase
+41,home appliance
+179,coffee cup
+568,human nose
+402,coffeemaker
+551,kitchen appliance
+393,train
+528,shelf
+323,scoreboard
+148,human mouth
+120,suit
+29,doll
+224,human ear
+161,hat
+216,jacket
+105,tie
+555,microphone
+499,camera
+229,door handle
+16,cosmetics
+394,tool
+417,cream
+405,handbag
+357,rose
+431,toilet paper
+554,luggage and bags
+203,fruit
+191,paper towel
+321,pencil case
+324,briefcase
+247,adhesive tape
+546,cake stand
+192,personal care
+14,apple
+481,orange
+492,peach
+223,grape
+302,swim cap
+39,backpack
+313,mobile phone
+488,jellyfish
+504,vegetable
+238,marine invertebrates
+463,fish
+511,cabbage
+30,skull
+218,street light
+237,mixing bowl
+489,goose
+421,platter
+411,wok
+525,marine mammal
+367,sushi
+349,pig
+295,porch
+119,coat
+123,bronze sculpture
+181,blender
+268,food processor
+172,tap
+18,snowman
+32,glove
+71,swimwear
+459,palm tree
+142,drum
+350,reptile
+432,squid
+1,tortoise
+510,shellfish
+420,bread
+427,turtle
+173,harbor seal
+328,plastic bag
+152,dinosaur
+449,shark
+585,rays and skates
+429,crocodile
+362,seafood
+472,oyster
+448,elephant
+493,coconut
+267,invertebrate
+49,fast food
+100,cheese
+220,pillow
+300,motorcycle
+194,sun hat
+595,canoe
+139,cowboy hat
+169,sombrero
+17,paddle
+50,bus
+443,tablet computer
+55,laptop
+94,computer keyboard
+519,envelope
+158,whiteboard
+91,carnivore
+446,dog
+318,mirror
+269,bookcase
+7,ladder
+270,refrigerator
+130,office building
+217,egg
+154,couch
+170,tin can
+310,milk
+400,truck
+384,tank
+107,cabinetry
+345,cupboard
+44,surfboard
+474,convenience store
+297,billiard table
+144,wine rack
+12,organ
+24,traffic light
+225,power plugs and sockets
+453,hand dryer
+535,van
+279,filing cabinet
+578,dishwasher
+524,honeycomb
+352,lipstick
+72,beehive
+21,human beard
+90,necklace
+246,sofa bed
+442,countertop
+476,bench
+180,cutting board
+188,wardrobe
+378,coffee table
+486,closet
+48,shorts
+439,banana
+569,pen
+249,sandal
+544,kitchen & dining room table
+518,stool
+95,printer
+547,cat furniture
+213,window blind
+207,kite
+150,dice
+197,skirt
+364,snowboard
+583,sewing machine
+182,plumbing fixture
+57,drill
+209,treadmill
+244,hammer
+548,bathroom accessory
+137,stapler
+344,mixer
+537,spice rack
+129,cookie
+558,pastry
+108,suitcase
+109,muffin
+477,ice cream
+591,seahorse
+454,soap dispenser
+592,perfume
+351,rifle
+312,plate
+371,tripod
+86,flashlight
+153,ratchet
+162,shower
+311,ring binder
+104,earrings
+543,serving tray
+545,dog bed
+326,nail
+28,towel
+52,screwdriver
+9,syringe
+325,kitchen knife
+285,knife
+166,dagger
+529,watch
+157,spatula
+239,kitchen utensil
+497,fork
+465,asparagus
+92,scissors
+424,helicopter
+523,microwave oven
+25,croissant
+581,sandwich
+531,salad
+385,taco
+363,submarine sandwich
+338,pasta
+582,shrimp
+347,pizza
+335,potato
+460,hamburger
+47,hot dog
+60,waffle
+61,pancake
+252,harpsichord
+512,carrot
+307,bust
+27,radish
+577,cantaloupe
+509,snail
+500,squash
+156,winter melon
+165,guacamole
+576,watermelon
+134,cocktail
+34,belt
+590,crown
+88,tiara
+5,football
+75,bat
+479,butterfly
+185,volleyball
+480,parachute
+598,rugby ball
+232,goldfish
+532,parrot
+196,flying disc
+112,snowmobile
+291,dumbbell
+127,cannon
+542,wall clock
+263,insect
+235,baseball bat
+541,tennis racket
+539,corded phone
+128,computer mouse
+164,fedora
+597,wheelchair
+133,calculator
+122,cat
+575,teddy bear
+56,miniskirt
+392,tomato
+395,picnic basket
+110,bidet
+430,toilet
+562,bell pepper
+358,rabbit
+208,tart
+190,whisk
+469,spoon
+189,coffee
+251,saucer
+303,frying pan
+564,lily
+596,remote control
+37,cart
+215,golf cart
+195,tree house
+444,waste container
+59,bear
+89,limousine
+242,horse
+118,camel
+261,scale
+141,studio couch
+254,heater
+437,deer
+331,ostrich
+482,antelope
+115,cattle
+227,giraffe
+380,sheep
+234,goat
+206,barrel
+339,penguin
+383,tea
+490,mule
+593,alpaca
+289,lavender
+412,whale
+167,scarf
+168,dolphin
+45,boot
+487,castle
+320,table tennis racket
+594,taxi
+517,drawer
+306,missile
+373,submarine
+369,ski
+390,trumpet
+212,horn
+389,strawberry
+74,bee
+151,oven
+516,pineapple
+522,sunflower
+425,owl
+418,monkey
+288,lynx
+419,lion
+388,tiger
+210,fox
+451,leopard
+283,kangaroo
+62,brown bear
+470,otter
+299,mouse
+356,red panda
+422,chicken
+125,gondola
+200,mechanical fan
+113,clock
+245,ceiling fan
+205,nightstand
+296,lizard
+31,washing machine
+278,alarm clock
+533,handgun
+471,bull
+70,bow and arrow
+501,racket
+473,horizontal bar
+23,parking meter
+386,telephone
+361,shotgun
+236,baseball glove
+260,fireplace
+271,wood-burning stove
+370,squirrel
+343,polar bear
+495,raccoon
+256,hamster
+526,sea lion
+455,porcupine
+570,ant
+436,spider
+199,salt and pepper shakers
+368,loveseat
+132,coin
+566,doughnut
+4,sea turtle
+428,hippopotamus
+230,rhinoceros
+438,frog
+377,snake
+563,turkey
+507,falcon
+467,hedgehog
+276,golf ball
+354,raven
+410,worm
+413,zebra
+435,lemon
+355,high heels
+10,sink
+559,grapefruit
+513,mango
+457,canary
+6,ambulance
+13,cassette deck
+187,slow cooker
+243,stationary bicycle
+589,crab
+305,bathroom cabinet
+231,bathtub
+240,light switch
+382,trombone
+403,violin
+116,cello
+178,roller skates
+327,tennis ball
+155,cricket ball
+304,snowplow
+117,jet ski
+102,fire hydrant
+198,gas stove
+272,punching bag
+565,pomegranate
+126,beetle
+484,moths and butterflies
+374,scorpion
+464,lobster
+76,starfish
+521,dragonfly
+174,stretcher
+330,chest of drawers
+376,training bench
+553,ruler
+478,caterpillar
+42,centipede
+73,brassiere
+26,cucumber
+146,zucchini
+290,lighthouse
+483,beaker
+423,eagle
+375,segway
+587,accordion
+341,pear
+342,infant bed
+556,broccoli
+226,panda
+360,saxophone
+81,wrench
+36,banjo
+275,jaguar
+458,cheetah
+346,jacuzzi
+506,unicycle
+63,woodpecker
+273,common fig
+401,measuring cup
+505,diaper
+527,ladybug
+534,sparrow
+222,isopod
+579,flute
+64,blue jay
+248,harp
+201,face powder
+496,chisel
+284,koala
+78,burrito
+66,bagel
+452,axe
+264,hair dryer
+79,chainsaw
+588,willow
+3,magpie
+280,artichoke
+204,french fries
+85,toaster
+33,tick
+274,cocktail shaker
+294,humidifier
+163,eraser
+329,oboe
+372,stethoscope
+65,pretzel
+580,balance beam
+416,pizza cutter
+202,fax
+574,skunk
+599,armadillo
+560,band-aid
+309,waffle iron
+175,can opener

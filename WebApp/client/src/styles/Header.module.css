@@ -1,0 +1,46 @@
+/* Header.css */
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #18191a;
+  /* border-bottom: 3px solid #9f9f9f; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 10px 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 70px;
+  min-height: 70px;
+  max-height: 70px;
+}
+
+.header > * {color: white;}
+
+.left-content {
+  display: flex;
+  align-items: center;
+}
+
+.left-content img {
+  width: 200px; /* Adjust the width as needed */
+  object-fit: contain;
+  object-position: center;
+}
+
+.left-content img:first-child {
+  margin-right: 30px;
+}
+
+span {
+  line-height: 100%;
+  font-size: 30px;
+  font-weight: 600;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.right-content {
+  font-weight: bold;
+}

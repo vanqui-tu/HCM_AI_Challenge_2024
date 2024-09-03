@@ -1,0 +1,19 @@
+data/features/
+data/features-large/
+data/keyframes/
+data/map-keyframes/
+data/metadata/
+data/objects/
+data/videos/
+data/detail_keyframes.json
+data/scripts/*.wav
+.history
+src/vectordb/*
+src/.ipynb_checkpoints/*
+src/__pycache__/*
+src/cc.en.300.bin.gz
+src/Unconfirmed 313036.crdownload
+src/Unconfirmed 658356.crdownload
+src/submission
+queries
+WebApp/server/keyframes
