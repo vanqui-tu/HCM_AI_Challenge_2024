@@ -15,8 +15,10 @@ import os
 from IPython.display import display, HTML
 from tqdm import tqdm
 
+# Change the file names for a consistent name format
 reformat_keyframe()
 reformat_object()
+
 
 class TextEmbedding:
     def __init__(self):
@@ -28,6 +30,7 @@ class TextEmbedding:
         with torch.no_grad():
             text_feature = self.model.encode_text(text_inputs)[0]
         return text_feature.detach().cpu().numpy()
+
 
 class FrameDoc(BaseDoc):
     embedding: NdArray[512]
@@ -64,21 +67,14 @@ class FrameDocs:
     def __call__(self):
         return self.doc_list.copy()
 
-    """_summary_
-    Get length
-    """
     def __len__(self) -> int:
         return len(self.doc_list)
-    
-    """_summary_
-        Filtering using objects and keywords
-    """
-
-    def contains(
-        self, keywords = None
-    ):
+        
+    def contains_v1(self, keywords = None):
+        """
+        Filter FrameDoc by keywords in transcript (Naive approach)
+        """
         doc_list = self.doc_list.copy()
-        # Filter by keyword in scripts
         if keywords:
             keywords = [kw.lower() for kw in keywords]
             for i in range(len(doc_list) - 1, -1, -1):
@@ -92,17 +88,17 @@ class FrameDocs:
                     pass
         return FrameDocs(doc_list=doc_list)
 
-    def contains_v2(
-        self, keywords = None
-    ):  
+    def contains(self, keywords = None):  
+        """
+        Filter FrameDoc by keywords in transcript (Efficient approach)
+        """
         doc_list = self.doc_list.copy()
-        print("Use contains v2")
-        # Get list video
+        # Get list of unique videos
         videos = []
         for i in range(len(doc_list) - 1, -1, -1):
             videos.append(doc_list[i].video_name)
         videos = list(set(videos))
-
+        # Read the transcript once for each video
         filtered_videos = []
         if keywords:
             keywords = [kw.lower() for kw in keywords]
@@ -115,29 +111,14 @@ class FrameDocs:
                             filtered_videos.append(video)
                 except FileNotFoundError:
                     pass
-                
-        filtered_doc_list = []
-        for i in range(len(doc_list) - 1, -1, -1):
-            if doc_list[i].video_name in filtered_videos:
-                filtered_doc_list.append(doc_list[i])
-
-        return FrameDocs(doc_list=filtered_doc_list)
-    
-    def get_doc_list(self):
-        return self.doc_list
-
-    def predict(
-        self, csv_name, objects = None, keywords = None, mode=0
-    ):
-        max_lines = 100
-        keywords = [kw.lower() for kw in keywords]
-        self = self.contains(objects=objects, keywords=keywords, search_mode=mode)
-        with open(csv_name, "w") as f:
-            for i in range(min(max_lines, len(self))):
-                row_text = (
-                    f"{self.doc_list[i].video_name}, {self.doc_list[i].actual_idx}\n"
-                )
-                f.write(row_text)
+            # Filter out frames that are not from a satisfied video        
+            filtered_doc_list = []
+            for i in range(len(doc_list) - 1, -1, -1):
+                if doc_list[i].video_name in filtered_videos:
+                    filtered_doc_list.append(doc_list[i])
+            return FrameDocs(doc_list=filtered_doc_list)
+        else:
+            return FrameDocs(doc_list=doc_list)
 
     def to_json(self):
         json_frame = [
@@ -151,7 +132,6 @@ class FrameDocs:
             }
             for doc in self.doc_list
         ]
-
         return json_frame
 
     def visualize(self):
@@ -170,6 +150,7 @@ class FrameDocs:
 
         display(HTML(create_html_script(img_docs)))
 
+# Load all framedoc to memory (Old version, without object labels)
 def get_all_docs(npy_files) -> FrameDocs:
     doc_list = []
     for feat_npy in tqdm(iterable=npy_files, ascii=True, desc="Loading FrameDocs"):
@@ -203,18 +184,19 @@ def get_all_docs(npy_files) -> FrameDocs:
                 )
     return FrameDocs(doc_list)
 
+# Load all framedoc to memory (New version)
 def get_all_docs_v2() -> FrameDocs:
     doc_list = []
     with open("../data/detail_keyframes.json", "r", encoding="utf-8") as json_file:
         detail_keyframes = js.load(json_file)
     json_file.close()
-    start_video = "L01_V001"
-    features_frames = np.load("../data/features/" + start_video + ".npy")
+    current_video = "L01_V001"
+    features_frames = np.load("../data/features/" + current_video + ".npy")
     for idx, keyframe in enumerate(tqdm(detail_keyframes)):
         if keyframe["v"] not in ["L22_V023", "L22_V024", "L35_V005", "L18_V006", "L19_V048", "L20_V010"]:
-            if keyframe["v"] != start_video:
-                start_video = keyframe["v"]
-                features_frames = np.load("../data/features/" + start_video + ".npy")
+            if keyframe["v"] != current_video:
+                current_video = keyframe["v"]
+                features_frames = np.load("../data/features/" + current_video + ".npy")
             id_frame = keyframe["i"]
             id =  int(keyframe["i"].lstrip('0'))
             doc_list.append(

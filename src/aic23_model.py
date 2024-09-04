@@ -3,14 +3,14 @@ from vector_database import TextEmbedding, VectorDB
 from framedoc import FrameDoc, FrameDocs, get_all_docs, get_all_docs_v2
 from docarray import DocList
 from const import *
-import time
+import os
 
 print("Loading model...")
-clean_dbs()
+# clean_dbs()
 all_feat_files = get_all_feats(feat=FEATURE_PATH)
 doc_list = get_all_docs(all_feat_files)
 # doc_list = get_all_docs_v2()
-print("Done...")
+# print("Done...")
 
 
 class AIC23_Model:
@@ -25,7 +25,6 @@ class AIC23_Model:
         num_threads=-1,
         method="ANN",
     ) -> None:
-        print("Index root database...")
         self.root = VectorDB(
             space=space,
             max_elements=max_elements,
@@ -35,10 +34,13 @@ class AIC23_Model:
             allow_replace_deleted=allow_replace_deleted,
             num_threads=num_threads,
             method=method,
-            workspace=ROOT_DB,
+            db_name=ROOT_DB,
         )
-        self.root.index(doc_list)
-        print("Done")
+        if not os.path.isdir(os.path.join(os.getcwd(), "vectordb", ROOT_DB)):
+            print("Index root database...")
+            self.root.index(doc_list)
+        else:
+            print("Load existing index...")
 
     def search(self, query_text: str, audio_texts=None, topk=1000) -> FrameDocs:
         return self.root.search(query_text=query_text, topk=topk).contains(
@@ -110,7 +112,6 @@ class AIC23_Model:
 
     # def create_temp_db(self, audio_texts=None, new_doc_list=None):
     #     start = time.time()
-
     #     self.temp = VectorDB(
     #         space="l2",
     #         max_elements=1024,
@@ -121,7 +122,6 @@ class AIC23_Model:
     #         num_threads=-1,
     #         method="ANN",
     #     )
-
     #     print("Index temporary database...")
     #     if new_doc_list == None and audio_texts != None:
     #         start2 = time.time()

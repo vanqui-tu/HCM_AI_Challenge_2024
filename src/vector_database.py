@@ -23,7 +23,7 @@ class VectorDB:
         allow_replace_deleted=False,
         num_threads=-1,
         method="ANN",
-        workspace = None
+        db_name = None
     ) -> None:
         """_summary_
         :param space: Specifies the similarity metric used for the space (options are "l2", "ip", or "cosine"). The default is "l2".
@@ -46,29 +46,26 @@ class VectorDB:
         # Check if parent workspace exists
         if not os.path.isdir(WORKSPACE):
             os.mkdir(WORKSPACE, 0o666)
-        if not workspace:
-            print("Alo")
-            # Create new workspace
+        # Check if a specified db name is provided
+        if not db_name:
+            # Create random name for the new db
             exits = [int(name.rsplit("_")[1]) for name in os.listdir(WORKSPACE)]
             while True:
                 id = random.getrandbits(128)
                 if id not in exits:
-                    self.workspace = os.path.join(
-                        self.workspace, WORKSPACE, "DB_" + str(id)
-                    )
+                    self.workspace = os.path.join(self.workspace, WORKSPACE, "DB_" + str(id))
                     break
         else:
-            self.workspace = os.path.join(
-                        self.workspace, "vectordb", workspace
-                    )
+            # Get the path of the db
+            self.workspace = os.path.join(self.workspace, "vectordb", db_name)
         self.method = method
-        print(self.workspace)
+        print(f"Vector database workspace: {self.workspace}")
         
         if num_threads <= 0:
             num_threads = multiprocessing.cpu_count()
-            print(f"{num_threads} threads had found...")
+            print(f"{num_threads} threads had been found...")
             
-        #   Approximate Nearest Neighbour based on HNSW algorithm
+        # Approximate Nearest Neighbour based on HNSW algorithm
         if method == "ANN":
             self.DB = HNSWVectorDB[FrameDoc](
                 space=space,

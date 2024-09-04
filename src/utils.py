@@ -131,10 +131,7 @@ def format_keyframes():
 
 
 def clean_dbs():
-    DBs = [
-        os.path.abspath(os.path.join(WORKSPACE, path)) for path in os.listdir(WORKSPACE)
-    ]
-
+    DBs = [os.path.abspath(os.path.join(WORKSPACE, path)) for path in os.listdir(WORKSPACE)]
     for db in DBs:
         shutil.rmtree(db)
 
@@ -143,7 +140,7 @@ def get_all_feats(feat=FEATURE_LARGE_PATH):
     if feat == FEATURE_PATH:
         print("Get features...")
     elif feat == FEATURE_LARGE_PATH:
-        print("Get large feature")
+        print("Get large features...")
     return [
         os.path.join(feat, file)
         for file in os.listdir(feat)
