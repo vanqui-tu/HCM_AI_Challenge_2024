@@ -4,7 +4,7 @@ from flask_socketio import SocketIO, emit
 import json
 import csv
 import time
-
+import os
 
 start = time.time()
 app = Flask(__name__)
@@ -13,6 +13,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 app.static_url_path = "/static"
 app.static_folder = "../data/keyframes"
 
+os.makedirs("./vectordb", exist_ok=True)
 print("### | Initial model...")
 from aic23_model import model
 
@@ -81,6 +82,9 @@ def search(message):
             )
         print("Search completed!")
         # print(results.to_json())
+        print(results.to_json())
+        print("ABC")
+
         emit("search_result", {"data": results.to_json()}, broadcast=False)
     except Exception as e:
         print("Search failed!")

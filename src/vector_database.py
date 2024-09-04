@@ -75,7 +75,9 @@ class VectorDB:
                 M=M,
                 allow_replace_deleted=allow_replace_deleted,
                 num_threads=num_threads,
-                workspace=self.workspace,)
+                workspace=self.workspace,
+                
+                )
 
         # Exhaustive search on the embeddings
         else:
@@ -97,9 +99,14 @@ class VectorDB:
 
     def search(self, query_text: str, topk=100) -> FrameDocs:
         query_doc = FrameDoc(embedding=self.text_embedding(query_text))
-        return FrameDocs(
-            self.DB.search(inputs=DocList[FrameDoc]([query_doc]), limit=topk)[0].matches
-        )
+        try:
+            framedocs =FrameDocs(
+                                self.DB.search(inputs=DocList[FrameDoc]([query_doc]), limit=topk)[0].matches
+                            )
+        except Exception as e:
+            print(e)
+            
+        return framedocs
 
     def delete(self, del_doc_list: List[FrameDoc]):
         self.DB.delete(docs=DocList[FrameDoc](del_doc_list))

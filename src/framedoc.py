@@ -41,7 +41,7 @@ class FrameDoc(BaseDoc):
     actual_time = 0.0
     fps = 0
     metadata = {}
-    object_labels: list[str] = []
+    object_labels = []
     link = ""
     id_frame=""
 
@@ -175,11 +175,12 @@ def get_all_docs(npy_files) -> FrameDocs:
                         embedding=feat,
                         video_name=video_name,
                         image_path=image_path,
-                        keyframe_id=frame_idx + 1,
+                        id_frame=str(frame_idx + 1),
                         actual_idx=actual_idx,
                         actual_time=map_kf["pts_time"][frame_idx],
                         fps=map_kf["fps"][frame_idx],
-                        metadata=metadata,
+                        # metadata=metadata,
+                        link=metadata["watch_url"],
                     )
                 )
     return FrameDocs(doc_list)
