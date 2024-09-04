@@ -49,6 +49,8 @@ class VectorDB:
         # Check if a specified db name is provided
         if not db_name:
             # Create random name for the new db
+        if not workspace:
+            # Create new workspace
             exits = [int(name.rsplit("_")[1]) for name in os.listdir(WORKSPACE)]
             while True:
                 id = random.getrandbits(128)

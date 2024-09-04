@@ -83,7 +83,6 @@ def search(message):
         print("Search completed!")
         # print(results.to_json())
         print(results.to_json())
-        print("ABC")
 
         emit("search_result", {"data": results.to_json()}, broadcast=False)
     except Exception as e:
