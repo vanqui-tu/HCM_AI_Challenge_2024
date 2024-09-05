@@ -41,7 +41,7 @@ class FrameDoc(BaseDoc):
     actual_time = 0.0
     fps = 0
     metadata = {}
-    object_labels = []
+    object_labels: list[dict] = [] 
     link = ""
     id_frame=""
 
