@@ -25,6 +25,9 @@ class AIC23_Model:
         num_threads=-1,
         method="ANN",
     ) -> None:
+        load_exist = False
+        if os.path.isdir(os.path.join(os.getcwd(), "vectordb", ROOT_DB)):
+            load_exist = True
         self.root = VectorDB(
             space=space,
             max_elements=max_elements,
@@ -36,7 +39,7 @@ class AIC23_Model:
             method=method,
             db_name=ROOT_DB,
         )
-        if not os.path.isdir(os.path.join(os.getcwd(), "vectordb", ROOT_DB)):
+        if not load_exist:
             print("Index root database...")
             self.root.index(doc_list)
         else:

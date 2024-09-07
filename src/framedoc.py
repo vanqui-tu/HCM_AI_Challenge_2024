@@ -179,7 +179,7 @@ def get_all_docs(npy_files) -> FrameDocs:
                         actual_idx=actual_idx,
                         actual_time=map_kf["pts_time"][frame_idx],
                         fps=map_kf["fps"][frame_idx],
-                        # metadata=metadata,
+                        metadata=metadata,
                         link=metadata["watch_url"],
                     )
                 )
