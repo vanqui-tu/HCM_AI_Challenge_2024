@@ -1,0 +1,32 @@
+.qualifying-round {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  display: flex;
+  transform: translateX(-50%);
+  height: 64px;
+  width: 60%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    height: 100%;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    &__text {
+      color: white !important;
+      font-size: 10px !important;
+    }
+    svg {
+      color: #eeeeee;
+    }
+  }
+}
+
+.ant-modal-footer{
+  display: none !important;
+}

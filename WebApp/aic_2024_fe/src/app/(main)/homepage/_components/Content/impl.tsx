@@ -12,6 +12,7 @@ import { CardList } from "../CardList";
 import { Footer } from "../Footer";
 import { SearchEngine } from "../SearchEngine";
 import { SearchValue } from "../SearchEngine/types";
+import { QualifyingRound } from "./QualifyingRound";
 import "./styles.scss";
 import { ContentProps } from "./types";
 
@@ -36,6 +37,7 @@ export function Content({ children, ...props }: ContentProps) {
 		console.log('Form submitted with firstSearchAudioQuery:', search.audio);
 
 		try {
+			setLoadingItems(true);
 			var startTime = performance.now();
 			const socket = io("http://localhost:5000");
 			socket.emit("search", { searchQuery: search.text, searchAudioQuery: "" });
@@ -55,9 +57,16 @@ export function Content({ children, ...props }: ContentProps) {
 						}))
 					);
 				}
+
+				setLoadingItems(false);
 			});
 
 			socket.on("search_error", (error) => {
+				open({
+					type: 'error',
+					message: error["error"]
+				});
+				setLoadingItems(false);
 				console.error("Server error:", error);
 			});
 
@@ -67,14 +76,13 @@ export function Content({ children, ...props }: ContentProps) {
 		} catch (error) {
 			console.error("Error:", error);
 		}
-	}, [search.audio, search.text]);
+	}, [open, search.audio, search.text]);
 
 	// TODO: Tạo 1 connect qua giao thức socket
 	useEffect(() => {
 		setLoading(true);
 		const socket = io(socketServerBaseUrl);
 		socket.on("connect", () => {
-			console.log("Connected to server");
 			setLoading(false);
 			open({
 				type: "success",
@@ -99,6 +107,7 @@ export function Content({ children, ...props }: ContentProps) {
 					setHasSearched={setHasSearched}
 					handleFormSubmit={handleFormSubmit}
 				/>
+
 				{/* Application's main content here*/}
 				<div
 					style={{
@@ -119,12 +128,13 @@ export function Content({ children, ...props }: ContentProps) {
 					{children}
 				</div>
 
-				<FloatButton.Group shape="square" style={{ insetInlineEnd: 24 }}>
+				{/* <FloatButton.Group shape="square" style={{ insetInlineEnd: 24 }}>
 					<FloatButton icon={<SyncOutlined />} />
 					<FloatButton.BackTop visibilityHeight={1024} />
-				</FloatButton.Group>
+				</FloatButton.Group> */}
 			</AntdContent>
 
+			<QualifyingRound />
 			{!hasSearched && <Footer />}
 		</>
 	);

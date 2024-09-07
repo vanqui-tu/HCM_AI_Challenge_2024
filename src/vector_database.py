@@ -60,11 +60,11 @@ class VectorDB:
             self.workspace = os.path.join(self.workspace, "vectordb", db_name)
         self.method = method
         print(f"Vector database workspace: {self.workspace}")
-        
+
         if num_threads <= 0:
             num_threads = multiprocessing.cpu_count()
             print(f"{num_threads} threads had been found...")
-            
+
         # Approximate Nearest Neighbour based on HNSW algorithm
         if method == "ANN":
             self.DB = HNSWVectorDB[FrameDoc](
@@ -100,12 +100,12 @@ class VectorDB:
     def search(self, query_text: str, topk=100) -> FrameDocs:
         query_doc = FrameDoc(embedding=self.text_embedding(query_text))
         try:
-            framedocs =FrameDocs(
+            framedocs = FrameDocs(
                                 self.DB.search(inputs=DocList[FrameDoc]([query_doc]), limit=topk)[0].matches
                             )
         except Exception as e:
-            print(e)
-            
+            print(f"Error while searching by VectorDB: {e}")
+
         return framedocs
 
     def delete(self, del_doc_list: List[FrameDoc]):

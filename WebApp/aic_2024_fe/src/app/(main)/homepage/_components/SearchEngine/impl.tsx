@@ -31,12 +31,9 @@ export function SearchEngine({
 			if (!hasSearched) {
 				setHasSearched(true);
 			}
-
-			setLoadingItems(true);
 			await handleFormSubmit();
-			setLoadingItems(false);
 		}
-	}, [handleFormSubmit, hasSearched, setHasSearched, setLoadingItems]);
+	}, [handleFormSubmit, hasSearched, setHasSearched]);
 
 	const handleClickSuffix = useCallback((event: any) => {
 		event.stopPropagation(); // Prevents the event from bubbling up to the parent
@@ -94,9 +91,9 @@ export function SearchEngine({
 		}}>
 			<div className='search-engine' tabIndex={1} ref={itemRef} style={
 				!hasSearched ? {
-					marginBottom: 30
+					marginBottom: 50
 				} : {
-					marginBottom: 10
+					marginBottom: 50
 				}
 			}>
 				<Search

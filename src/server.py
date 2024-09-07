@@ -80,6 +80,7 @@ def search(message):
                 audio_texts=audioQueries,
                 topk=topk,
             )
+            
         print("Search completed!")
         # print(results.to_json())
         print(results.to_json())

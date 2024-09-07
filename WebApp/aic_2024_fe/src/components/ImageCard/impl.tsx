@@ -45,7 +45,7 @@ export const ImageCard = forwardRef<HTMLDivElement, ImageCardProps>(
         // const [width, setWidth] = useState(0);
         // const height = useMemo(() => width * 2 / 3, [width]);
 
-        const { open } = useNotif()
+        const { open } = useNotif();
         const contentStyles = useMemo(() => (hover ?
             {
                 inset: `auto 0 0 0`

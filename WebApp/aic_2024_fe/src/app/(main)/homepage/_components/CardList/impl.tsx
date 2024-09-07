@@ -12,8 +12,6 @@ export function CardList({ loading, items, hasSearched }: CardListProps) {
 	const cardlistRef = useRef<HTMLDivElement>(null);
 	const [width, setWidth] = useState<number>(0);
 	const [height, setHeight] = useState<number>(0);
-	const [loadingItems, setLoadingItems] = useState(false);
-	const isLoading = useMemo(() => loading || loadingItems, [loading, loadingItems]);
 	const [currentDisplayType, setCurrentDisplayType] = useState('large');
 
 	const cardDisplayItems = useMemo(() => [
@@ -107,7 +105,7 @@ export function CardList({ loading, items, hasSearched }: CardListProps) {
 			}
 
 			{
-				isLoading ? (
+				loading ? (
 					<Loader className='card-list__loading' />
 				) : (
 					items.length === 0 ? (

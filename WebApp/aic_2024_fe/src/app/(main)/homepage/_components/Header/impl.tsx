@@ -35,7 +35,7 @@ export function Header({ isAuth }: HeaderProps) {
 			<Link href="/" className="header__logo">
 				<Logo />
 			</Link>
-
+			
 			{/* Items */}
 			<div className="header__content">
 				{isAuth ? (
