@@ -23,7 +23,7 @@ class VectorDB:
         allow_replace_deleted=False,
         num_threads=-1,
         method="ANN",
-        db_name = None
+        db_name=None,
     ) -> None:
         """_summary_
         :param space: Specifies the similarity metric used for the space (options are "l2", "ip", or "cosine"). The default is "l2".
@@ -53,7 +53,9 @@ class VectorDB:
             while True:
                 id = random.getrandbits(128)
                 if id not in exits:
-                    self.workspace = os.path.join(self.workspace, WORKSPACE, "DB_" + str(id))
+                    self.workspace = os.path.join(
+                        self.workspace, WORKSPACE, "DB_" + str(id)
+                    )
                     break
         else:
             # Get the path of the db
@@ -76,8 +78,7 @@ class VectorDB:
                 allow_replace_deleted=allow_replace_deleted,
                 num_threads=num_threads,
                 workspace=self.workspace,
-                
-                )
+            )
 
         # Exhaustive search on the embeddings
         else:
@@ -100,9 +101,16 @@ class VectorDB:
     def search(self, query_text: str, topk=100) -> FrameDocs:
         query_doc = FrameDoc(embedding=self.text_embedding(query_text))
         try:
+            rst = self.DB.search(inputs=DocList[FrameDoc]([query_doc], True), limit=topk)[
+                    0
+                ].matches
+        except Exception as e:
+            print(e)
+            
+        try:
             framedocs = FrameDocs(
-                                self.DB.search(inputs=DocList[FrameDoc]([query_doc]), limit=topk)[0].matches
-                            )
+                rst
+            ) 
         except Exception as e:
             print(f"Error while searching by VectorDB: {e}")
 
@@ -110,6 +118,7 @@ class VectorDB:
 
     def delete(self, del_doc_list: List[FrameDoc]):
         self.DB.delete(docs=DocList[FrameDoc](del_doc_list))
+
 
 if __name__ == "__main__":
     pass

@@ -14,6 +14,7 @@ import pandas as pd
 import os
 from IPython.display import display, HTML
 from tqdm import tqdm
+from get_detail_frames import get_detail_frames
 
 # Change the file names for a consistent name format
 reformat_keyframe()
@@ -41,7 +42,7 @@ class FrameDoc(BaseDoc):
     actual_time = 0.0
     fps = 0
     metadata = {}
-    object_labels: list[dict] = [] 
+    object_labels = [] 
     link = ""
     id_frame=""
 
@@ -59,17 +60,17 @@ class FrameDoc(BaseDoc):
 
 
 class FrameDocs:
-    doc_list = []
+    doc_list: list[FrameDoc] = []
 
-    def __init__(self, doc_list) -> None:
-        self.doc_list = doc_list.copy()
+    def __init__(self, doc_list: list[FrameDoc]) -> None:
+        self.doc_list = doc_list
 
     def __call__(self):
-        return self.doc_list.copy()
+        return self.doc_list
 
     def __len__(self) -> int:
         return len(self.doc_list)
-        
+
     def contains_v1(self, keywords = None):
         """
         Filter FrameDoc by keywords in transcript (Naive approach)
@@ -111,7 +112,7 @@ class FrameDocs:
                             filtered_videos.append(video)
                 except FileNotFoundError:
                     pass
-            # Filter out frames that are not from a satisfied video        
+            # Filter out frames that are not from a satisfied video
             filtered_doc_list = []
             for i in range(len(doc_list) - 1, -1, -1):
                 if doc_list[i].video_name in filtered_videos:
@@ -188,13 +189,18 @@ def get_all_docs(npy_files) -> FrameDocs:
 # Load all framedoc to memory (New version)
 def get_all_docs_v2() -> FrameDocs:
     doc_list = []
+    
+    if not os.path.exists("../data/detail_keyframes.json"):
+        get_detail_frames()
+        
     with open("../data/detail_keyframes.json", "r", encoding="utf-8") as json_file:
         detail_keyframes = js.load(json_file)
     json_file.close()
     current_video = "L01_V001"
     features_frames = np.load("../data/features/" + current_video + ".npy")
     for idx, keyframe in enumerate(tqdm(detail_keyframes)):
-        if keyframe["v"] not in ["L22_V023", "L22_V024", "L35_V005", "L18_V006", "L19_V048", "L20_V010"]:
+        # if keyframe["v"] not in ["L22_V023", "L22_V024", "L35_V005", "L18_V006", "L19_V048", "L20_V010"]:
+        if True:
             if keyframe["v"] != current_video:
                 current_video = keyframe["v"]
                 features_frames = np.load("../data/features/" + current_video + ".npy")

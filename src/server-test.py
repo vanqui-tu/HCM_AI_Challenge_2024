@@ -12,7 +12,7 @@ app.static_url_path = '/static'
 app.static_folder = '../data/keyframes'
 
 print("### | Initial model...")
-from aic23_model import model
+from src.aic24_model import model
 
 # print("### | Get detail keyframes...")
 # with open("../data/detail_keyframes.json", "r") as json_file:

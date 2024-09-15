@@ -4,6 +4,7 @@ from framedoc import FrameDoc, FrameDocs, get_all_docs, get_all_docs_v2
 from docarray import DocList
 from const import *
 import os
+import shutil
 
 print("Loading model...")
 # clean_dbs()
@@ -27,6 +28,7 @@ class AIC23_Model:
     ) -> None:
         load_exist = False
         if os.path.isdir(os.path.join(os.getcwd(), "vectordb", ROOT_DB)):
+            shutil.rmtree(os.path.join(os.getcwd(), "vectordb", ROOT_DB))
             load_exist = True
         self.root = VectorDB(
             space=space,
@@ -39,11 +41,12 @@ class AIC23_Model:
             method=method,
             db_name=ROOT_DB,
         )
-        if not load_exist:
-            print("Index root database...")
-            self.root.index(doc_list)
-        else:
-            print("Load existing index...")
+        # if not load_exist:
+        #     print("Index root database...")
+        #     self.root.index(doc_list)
+        # else:
+        #     print("Load existing index...")
+        self.root.index(doc_list)
 
     def search(self, query_text: str, audio_texts=None, topk=1000) -> FrameDocs:
         return self.root.search(query_text=query_text, topk=topk).contains(
@@ -94,65 +97,6 @@ class AIC23_Model:
         frameDocs = FrameDocs(results_)
 
         return frameDocs
-
-    def search_in_sequence_and_visualize(
-        self,
-        query_text_1: str,
-        query_text_2: str,
-        strict_order=False,
-        audio_texts=None,
-        topk=1000,
-    ) -> FrameDocs:
-        frameDocs = self.search_in_sequence(
-            query_text_1=query_text_1,
-            query_text_2=query_text_2,
-            strict_order=strict_order,
-            audio_texts=audio_texts,
-            topk=topk,
-        )
-        frameDocs.visualize()
-        return frameDocs
-
-    # def create_temp_db(self, audio_texts=None, new_doc_list=None):
-    #     start = time.time()
-    #     self.temp = VectorDB(
-    #         space="l2",
-    #         max_elements=1024,
-    #         ef_construction=16,
-    #         ef=100,
-    #         M=128,
-    #         allow_replace_deleted=False,
-    #         num_threads=-1,
-    #         method="ANN",
-    #     )
-    #     print("Index temporary database...")
-    #     if new_doc_list == None and audio_texts != None:
-    #         start2 = time.time()
-    #         new_doc_list = doc_list.contains(keywords=audio_texts)
-    #         end2 = time.time()
-    #         print(
-    #             f"Filter text: {round(((end2 - start2) / 60))}m {round((int(end2 - start2) % 60))}s"
-    #         )
-    #     print(f"Temporary database size: {len(new_doc_list)}")
-    #     self.temp.index(new_doc_list)
-    #     end = time.time()
-    #     print(f"Done: {round(((end - start) / 60))}m {round((int(end - start) % 60))}s")
-
-    # def search_temp_and_visualize(
-    #     self, query_text: str, audio_texts=None, topk=1000
-    # ) -> FrameDocs:
-    #     frameDocs = self.temp.search(query_text=query_text, topk=topk).contains(
-    #         keywords=audio_texts
-    #     )
-    #     frameDocs.visualize()
-    #     return frameDocs
-
-    # def filter_audio_and_search(
-    #     self, query_text: str, audio_texts=None, topk=1000
-    # ) -> FrameDocs:
-    #     self.create_temp_db(audio_texts=audio_texts)
-    #     return self.temp.search(query_text=query_text, topk=topk)
-
 
 model = AIC23_Model()
 print("Loading model: Done!")
